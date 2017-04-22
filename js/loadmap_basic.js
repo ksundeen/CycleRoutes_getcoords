@@ -7,7 +7,7 @@
     
     // global variable for holding starting & ending lat long
     var startLatLong = [];
-    var endLatLong [];
+    var endLatLong = [];
     
 
     // Instatiates map with traffic layer, layers, and panels
