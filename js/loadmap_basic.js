@@ -30,31 +30,88 @@
         // add google traffic layer
         var trafficLayer = new google.maps.TrafficLayer();
         trafficLayer.setMap(map);     
-        makeClickedMarker(map);
+        makeNavigationMarker(map, "start");
+        makeNavigationMarker(map, "end");
+
      };
     
-    function makeClickedMarker(map) {
+    /*
+    Attaches a click event to the map and creates a basic marker onclick, and then when user clicks again the marker is removed.
+    @param map: google maps google.maps.Map object.
+    @param status: "start" or "end" for whether the marker object created is the starting or ending position of the track.
+    */
+    function makeNavigationMarker(map, navStatus) {
         google.maps.event.addListener(map, 'click', function(event) {    
             var latitude = event.latLng.lat();
             var longitude = event.latLng.lng();            
-            console.log(latitude + ", " + longitude);
+//            console.log(latitude + ", " + longitude);
             // Place a draggable marker on the map
+                    
+            // set colors for start/end
+            if (navStatus == "start") {
+                var newUrl = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                // populate global variable for lat longs
+                startLatLong = [longitude, latitude];
+                console.log("startLatLong: ", startLatLong);
+            } else if (navStatus == "end") {
+                // populate global variable for lat longs
+                var newUrl = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'       
+                endLatLong = [longitude, latitude];           
+                console.log("endLatLong: ", endLatLong);
+            }
+            
+            var coloredIcon = {
+                url: newUrl,
+                fillOpacity: .5,
+                anchor: new google.maps.Point(25,50),
+                scaledSize: new google.maps.Size(35,35)                
+            };            
+            
             var clickMarker = new google.maps.Marker({
                 position: event.latLng,
+                icon: coloredIcon,
                 map: map,
+                animation: google.maps.Animation.DROP,
                 draggable: true,
                 title: "Drag me!"
-            });                          
+            });
+            
+//        marker = new google.maps.Marker({
+//          map: map,
+//          draggable: true,
+//          animation: google.maps.Animation.DROP,
+//          position: {lat: 59.327, lng: 18.067}
+//        });
+//        marker.addListener('click', toggleBounce);
+//      }
+
+//      function toggleBounce() {
+//        if (marker.getAnimation() !== null) {
+//          marker.setAnimation(null);
+//        } else {
+//          marker.setAnimation(google.maps.Animation.BOUNCE);
+//        }
+//      }            
             
             // removes marker created for lat long
-            google.maps.event.addListener(map, "click", function (event) {
-            clickMarker.setMap(null)             
+            google.maps.event.addListener(map, clickMarker, "click", function (event) {
+                clickMarker.setMap(null)             
 
-            }); //end addListener      
+            }); //end addListener    
+            
+
         })
     };
 
-    /* Loads data using AJAX, with parameters of:
+    /*
+    Takes the latlong object and writes numbers into the html element
+    */
+    function writeLatLongToElement(latlong, htmlSelector) {
+          $(htmlSelector).html = latlong;
+    };
+    
+    /* 
+    Loads data using AJAX, with parameters of:
     @param map: api's map object
     @param dataUrl: the URL or local locations of geojson data
     @param category: a string description of each layer
@@ -177,7 +234,8 @@
             title: name,
             zIndex: Math.round(latlng.lat()*-100000)<<5
         });
-
+        // no purpose for bouncing!
+        marker.setAnimation(google.maps.Animation.BOUNCE)
         // Store category and name info as a marker properties 
         marker.mycategory = category;   
         marker.html = html
