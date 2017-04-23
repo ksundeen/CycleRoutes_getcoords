@@ -50,6 +50,8 @@
     <!--Kim added form-->        
     <div class="sidebar col-xs-3" id="entryform">
       <form action="#">
+<!--
+          <p>...not working yet</p>
         <label for="entrytype">How do you want to enter your start/end points?</label>          
         <select id="entrytype">
           <option value="mappoints">Click My Points</option>    
@@ -57,12 +59,15 @@
           <option value="pointentry">Enter Lat/Long</option>
           <option value="suggest">Let Us Suggest!</option>
         </select>
-        <button type="button" class="btn btn-success active" role="button" id="startbutton">Pick Starting Point</button>
+          <p>...not working yet</p>
+-->
+          
+        <button type="button" class="btn btn-success active" role="button" id="startbutton">Click Me to Pick Starting Point</button>
 <!--        <label>Starting Point</label>-->
         <input type="text" id="startbox" placeholder="Click a starting map point...">
-        <button type="button" class="btn btn-danger" role="button" id="endbutton">Pick Ending Point</button>
+        <button type="button" class="btn btn-danger" role="button" id="endbutton">Click Me to Pick Ending Point</button>
 <!--        <label>Ending Point</label>-->
-        <input type="text" id="destbox" placeholder="Click an ending map point...">
+        <input type="text" id="endbox" placeholder="Click an ending map point...">
         <input type="submit" value="Get Route">
       </form>
     </div>     

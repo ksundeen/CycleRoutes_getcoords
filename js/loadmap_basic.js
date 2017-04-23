@@ -32,15 +32,37 @@
      };
     
     /*
+    When user clicks the start button, a click on the map fills in the form field with the lat long
+    */
+    function clickStartButton() {
+        $("#startbutton").click(function(){
+//            alert("Click a place on the map for a starting point.")
+            makeNavMarkerWithClick(map, "Start");
+        })
+    };
+    
+    /*
+    When user clicks the end button, a click on the map fills in the form field with the lat long
+    */
+    function clickEndButton() {
+        $("#endbutton").click(function(){
+//            alert("Click a place on the map for a ending point.")
+            makeNavMarkerWithClick(map, "End");
+        })
+    };        
+    
+    /*
     Attaches a click event to the map and creates a basic marker onclick, and then when user clicks again the marker is removed.
     @param map: google maps google.maps.Map object.
     @param navStatus: "Start" or "End" for whether the marker object created is the starting or ending position of the track.
     */
-    function makeNavigationMarker(map, navStatus) {
+    function makeNavMarkerWithClick(map, navStatus) {
+        // holds function variable
+        var latLongOut = [];
         google.maps.event.addListener(map, 'click', function(event) {    
             var latitude = event.latLng.lat();
             var longitude = event.latLng.lng();            
-            var latLongOut = [latitude, longitude];
+            latLongOut = [latitude, longitude];
             // Place a draggable marker on the map
             // set colors for start/end
             if (navStatus == "Start") {
@@ -50,7 +72,7 @@
             } else if (navStatus == "End") {
                 // populate global variable for lat longs
                 var newUrl = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-                writeLatLongToSelectedForm(latLongOut, "destbox");
+                writeLatLongToSelectedForm(latLongOut, "endbox");
             };
             var coloredIcon = {
                 url: newUrl,
@@ -73,31 +95,9 @@
             google.maps.event.addListener(map, "click", function (event) {
                 clickMarker.setMap(null)             
             }); //end addListener    
+            console.log(latLongOut);
         });
-    };
-
-    /*
-    When user clicks the start button, a click on the map fills in the form field with the lat long
-    */
-    function clickStartButton() {
-        $("#startbutton").click(function(){
-            alert("Click a place on the map for a starting point.")
-            makeNavigationMarker(map, "Start")
-        })
-    };
-    
-    /*
-    When user clicks the end button, a click on the map fills in the form field with the lat long
-    */
-    function clickEndButton() {
-        $("#endbutton").click(function(){
-            alert("Click a place on the map for a ending point.")
-            makeNavigationMarker(map, "End")
-            
-        makeNavigationMarker(map, "Destination");
-        })
     };    
-    
     
     /*
     Takes the latlong object and writes numbers into the form's id of that in focus. Enter as "myid"...etc
@@ -106,7 +106,13 @@
     */
     function writeLatLongToSelectedForm(latlong, formId) {
         $("input[id="+formId+"]").val(String(latlong));
+        
     };
+    
+    //////////
+    // function to get user's device location. see https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+    //////////
+    
     
     /* 
     Loads data using AJAX, with parameters of:
