@@ -56,10 +56,12 @@
           <option value="address">Enter Address</option>             
           <option value="pointentry">Enter Lat/Long</option>
           <option value="suggest">Let Us Suggest!</option>
-        </select>      
-        <label>Starting Point</label>
+        </select>
+        <button type="button" class="btn btn-success active" role="button" id="startbutton">Pick Starting Point</button>
+<!--        <label>Starting Point</label>-->
         <input type="text" id="startbox" placeholder="Click a starting map point...">
-        <label>Ending Point</label>
+        <button type="button" class="btn btn-danger" role="button" id="endbutton">Pick Ending Point</button>
+<!--        <label>Ending Point</label>-->
         <input type="text" id="destbox" placeholder="Click an ending map point...">
         <input type="submit" value="Get Route">
       </form>
@@ -78,7 +80,7 @@
 
     <!--	<script src="js/loadmap.js"></script>-->
     <!--    Adds basic geojson points with no layer toggle-->
-    <script src="js/loadmap_basic.js?ver=1.6"></script>
+    <script src="js/loadmap_basic.js?ver=1.7"></script>
 <!--    Based on example for loading google lat long into form-->
 <!--    <script src="js/googleform.js"></script>-->
 
