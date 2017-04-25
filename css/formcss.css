@@ -15,7 +15,7 @@ input[type=text], select {
 
 input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #4099FF;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -32,4 +32,20 @@ entryform {
 /*    border-radius: 5px;*/
     background-color: #f2f2f2;
     padding: 10px;
+}
+
+#startbutton {
+    background-color:#66cc66;
+}
+        
+#startbutton:hover {
+    background-color: #2d862d;
+}
+
+#endbutton {
+    background-color: #ff6666;
+}
+
+#endbutton:hover {
+    background-color: #ff0000;
 }

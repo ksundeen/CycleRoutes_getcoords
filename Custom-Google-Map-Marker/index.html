@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<title>Google Maps API</title>
+
+<style type="text/css">
+
+#map-canvas {
+	width: 700px;
+	height: 400px;
+}
+
+</style>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script type="text/javascript" src="CustomGoogleMapMarker.js"></script>
+<script type="text/javascript">
+
+function initialize() {
+
+	var myLatlng = new google.maps.LatLng(-31.9546781,115.852662);
+	var mapOptions = {
+		zoom: 14,
+		center: myLatlng,
+		disableDefaultUI: true
+	}
+	
+	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	
+	/*
+	// Example standard marker
+	var marker = new google.maps.Marker({
+		position: myLatlng,
+		map: map,
+		title: 'Hello World!'
+	});
+	*/
+	
+	overlay = new CustomMarker(
+		myLatlng, 
+		map,
+		{
+			marker_id: '123'
+		}
+	);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+</head>
+<body>
+
+	<div id="map-canvas">
+	</div>
+
+</body>
+</html>
