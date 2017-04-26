@@ -12,14 +12,14 @@
 <!--Kim's css    -->
 <link rel="stylesheet" href="css/formcss.css?ver=1.2">
     
-
 <!--  jQuery -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <!--<script src="//code.jquery.com/jquery-migrate-1.2.1.mim.js"></script>-->
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
 <!-- Google Maps API -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDHXqtgqGCj7RMkh3ual_upusbnbFUq4Ko&libraries=places,visualization"></script>
@@ -64,10 +64,10 @@
           
 <!--        <button type="button" class="btn btn-success active" role="button" id="startbutton">Click Me to Pick Starting Point</button>-->
         <label>Starting Point</label>
-        <input type="text" id="startbox" placeholder="Click a starting map point...">
+        <input type="text" id="startfield" placeholder="Click a starting map point...">
 <!--        <button type="button" class="btn btn-danger" role="button" id="endbutton">Click Me to Pick Ending Point</button>-->
         <label>Ending Point</label>
-        <input type="text" id="endbox" placeholder="Click an ending map point...">
+        <input type="text" id="endfield" placeholder="Click an ending map point...">
         <input type="submit" value="Get Route">
       </form>
     </div>     
@@ -82,10 +82,32 @@
     <!--Referenced for accordian jquery CDN-->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>        
     <script src="lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>    
+    
+    <script>
+        /* When user clicks the end button, a click on the map fills in the form field with the lat long object and writes numbers into the startbutton and startfield.
+    @param latlong: an array of the [latitude, longitude] or any numbers to populate the form's field.
+    @param navOption: "start" or "end" of the form field id ("endbox" or "startbox" or button id of "startbutton" or "endbutton". 
+    */
+    function sendLocationToStart(latlong) {
+        $("#startbutton").click(function(){
+            $("input[id=startfield]").val(latlong);
+        });
+    };       
+    
+    /* When user clicks the end button, a click on the map fills in the form field with the lat long object and writes numbers into the endbutton and endfield.
+    @param latlong: an array of the [latitude, longitude] or any numbers to populate the form's field.
+    @param navOption: "start" or "end" of the form field id ("endbox" or "startbox" or button id of "startbutton" or "endbutton". 
+    */
+    function sendLocationToEnd(latlong) {
+        $("#endbutton").click(function(){
+            $("input[id=endfield]").val(latlong);
+        });
+    };   
+    </script>
 
     <!--	<script src="js/loadmap.js"></script>-->
     <!--    Adds basic geojson points with no layer toggle-->
-    <script src="js/loadmap_basic.js?ver=1.7"></script>
+    <script src="js/loadmap_basic.js?ver=1.8"></script>
 <!--    Based on example for loading google lat long into form-->
 <!--    <script src="js/googleform.js"></script>-->
 

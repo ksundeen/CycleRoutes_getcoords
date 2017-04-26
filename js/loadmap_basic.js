@@ -24,40 +24,14 @@
         
         // add google traffic layer
         var trafficLayer = new google.maps.TrafficLayer();
-        trafficLayer.setMap(map);     
-        
-        // set event listeners for clicking on the start and end buttons for navigation
-        clickStartButton();
-        clickEndButton();
+        trafficLayer.setMap(map);            
      };
     
-    /*
-    When user clicks the start button, a click on the map fills in the form field with the lat long
-    */
-    function clickStartButton() {
-        $("#startbutton").click(function(){
-            //alert("Click a place on the map for a starting point.")
-            makeNavMarkerWithClick(map, "Start");
-        })
-    };
-    
-    /*
-    When user clicks the end button, a click on the map fills in the form field with the lat long
-    */
-    function clickEndButton() {
-        $("#endbutton").click(function(){
-            //alert("Click a place on the map for a ending point.")
-            makeNavMarkerWithClick(map, "End");
-        })
-    };        
-    
-    /*
-    Attaches a click event to the map and creates a basic marker onclick, and then when user clicks again the marker is removed.
+    /* Attaches a click event to the map and creates a basic marker onclick, and then when user clicks again the marker is removed.
     @param map: google maps google.maps.Map object.
-    @param navStatus: "start" or "end" for whether the marker object created is the starting or ending position of the track.
+    @param navStatus: "start" or "end" for whether the marker object created is the starting or ending position of the track. 
     */
-    function makeNavMarkerWithClick(map, navStatus) {
-        // holds function variable
+    function makeNavMarkerWithClick(map, navStatus) {    
         var latLongOut = [];
         google.maps.event.addListener(map, 'click', function(event) {    
             var latitude = event.latLng.lat();
@@ -94,22 +68,14 @@
             }); //end addListener    
             
             // removes marker created for lat long
-            google.maps.event.addListener(map, "dblclick", function (event) {  
+            google.maps.event.addListener(map, "click", function (event) {  
                 // populate global variable for lat longs    
                 writeLatLongToSelectedForm(latLongOut, navStatus+"box");                
             }); //end addListener    
             
         });
-    };    
+    };     
     
-    /*
-    Takes the latlong object and writes numbers into the form's id of that in focus. Enter as "myid"...etc
-    @param latlong: an array of the [latitude, longitude] or any numbers to populate the form's field with the form id="formId"
-    @param formId: id of field for form to be populated with latlong numbers
-    */
-    function writeLatLongToSelectedForm(latlong, formId) {
-        $("input[id="+formId+"]").val(String(latlong));
-    };
     
     /*
     PseudoCode:
@@ -125,72 +91,22 @@
     --function swapNavPoints() When user enters either a start or end point, then a link appears near other buttons to allow user to swap the start/end points. When button is clicked, then store start field .val in variable, store in end field .val in variable and then write them into opposite fields. 
     */
     
-    /* Creates a google marker for navigation points and set up event window
-    from https://gist.github.com/phirework/4771983
-    With parameters of:
-    @param latlng: the google map's api google.maps.LatLng() object based on LatLong coordinates in geojson data
-    @param name: the geojson's properties attribute, name attribute
-    @param html: the html code to be displayed in a popup
-    @param category: string of type of data or layers from different geojson files
-    */
-    function createNavMarker(latlng, name, html, category) {
-        var myIcon = {
-            newUrl:  'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-        }    
-        
-        var boxText = document.createElement("div");
-        boxText.style.cssText = "margin-top: 42px; background: " + backgroundColor + "; padding: 10px; border-radius: 10px; color: #fff";
-        var fullContent = name 
-        boxText.innerHTML = html;
 
-        var myOptions = {
-            content: boxText,
-            disableAutoPan: false,
-            maxWidth: 0,
-            pixelOffset: new google.maps.Size(-100, 0),
-            zIndex: null,
-            boxStyle: {width: "250px"},
-            closeBoxURL: "",
-            infoBoxClearance: new google.maps.Size(1, 1),
-            isHidden: false,
-            pane: "floatPane",
-            enableEventPropagation: false
-        };
-
-        var marker = new google.maps.Marker({
-            position: latlng,
-            //        icon: category + ".png",
-            icon: myIcon,
-            map: map,
-            title: name,
-            zIndex: Math.round(latlng.lat()*-100000)<<5
-        });
-        // no purpose for bouncing!
-        marker.setAnimation(google.maps.Animation.DROP)
-        // Store category and name info as a marker properties 
-        marker.mycategory = category;   
-        marker.html = html
-        marker.myname = name;
-        gmarkersTweets.push(marker);
-//        console.log("gmarkersTweets: ", gmarkersTweets);
-
-        google.maps.event.addListener(marker, 'click', function() {
-            infoBox.setOptions(myOptions)
-            infoBox.open(map, this);
-        });        
-    }; // end createMarker    
-    
     //////////
     // function to get user's device location. see https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
     //////////
     
+    //////////
+    // function get allow user to drag their marker and get the new location
+    // http://stackoverflow.com/questions/5290336/getting-lat-lng-from-google-marker
+    ///////////
     
-    /* 
-    Loads data using AJAX, with parameters of:
+    
+    /* Loads data using AJAX.
     @param map: api's map object
     @param dataUrl: the URL or local locations of geojson data
     @param category: a string description of each layer
-    @param showOption: with the layer should be on ("layerOn") or off ("layerOff") initially on mapload
+    @param showOption: with the layer should be on ("layerOn") or off ("layerOff") initially on mapload 
     */
     function getAjaxData(map, dataUrl, category, markerList) {
         // load the data
@@ -207,9 +123,8 @@
     
     
     /* Takes geojson data to parse out geometries to create lat long coordinates 
-    With parameters of:
     @param data: the json response object returned from the URL
-    @param category: string of type of data or layers from different geojson files
+    @param category: string of type of data or layers from different geojson files 
     */
     function parsePoints(data, category, markerList) {
         for (var i = 0; i < data.features.length; i++) {
@@ -225,7 +140,8 @@
 
             } else if (category = "attractions") {
                 name = itemProps.name;
-                html = "<b>"+itemProps.name+"<\/b><br \/>"+itemProps.desc_+"<br/>title='"+ itemProps.name;
+//                console.log("itemProps: ",itemProps);
+                html = "<b>"+itemProps.name+"<\/b><br/>"+itemProps.desc+"<br/>title='"+ itemProps.name;
                 var geom = data.features[i].geometry.coordinates;
                 // the lat long were reversed. In google maps, it should be long, lat
                 pointLatLong = new google.maps.LatLng(geom[1], geom[0]);
@@ -239,20 +155,12 @@
     
     /* Creates a google marker and set up event window
     from https://gist.github.com/phirework/4771983
-    With parameters yof:
     @param latlng: the google map's api google.maps.LatLng() object based on LatLong coordinates in geojson data
     @param name: the geojson's properties attribute, name attribute
     @param html: the html code to be displayed in a popup
     @param category: string of type of data or layers from different geojson files
     */
-    function createMarker(latlng, name, html, category) {
-        // Added for nav buttons
-        var endButton = "<p><button type='button' id='endbutton'>Ride to Here</button></p>";        
-        var startButton = "<p><button type='button' id='startbutton'>Ride from Here</button></p>";
-        var addNavButtons = endButton + startButton;
-        html += addNavButtons;
-        //////////////        
-        
+    function createMarker(latlng, name, html, category) {        
         // block to make different marker symbols for the "dataType" parameter.
         if (category == "tweets") {
             var myIcon = {
@@ -276,17 +184,56 @@
                 anchor: new google.maps.Point(25,50),
                 scaledSize: new google.maps.Size(35,35)                
             };
-//            var myIcon = 'img/attractions.svg';
             var backgroundColor = "rgba(120,120,120, 0.6)";
         }        
+
+        var marker = new google.maps.Marker({
+            position: latlng,
+            //        icon: category + ".png",
+            icon: myIcon,
+            map: map,
+            title: name,
+            zIndex: Math.round(latlng.lat()*-100000)<<5
+        });
         
-        var boxText = document.createElement("div");
-        boxText.style.cssText = "margin-top: 42px; background: " + backgroundColor + "; padding: 10px; border-radius: 10px; color: #fff";
+        marker.setAnimation(google.maps.Animation.DROP)
+        // Store category and name info as a marker properties 
+        marker.mycategory = category;   
+        marker.myname = name;
+        gmarkersTweets.push(marker);
+        google.maps.event.addListener(marker, 'click', function() {
+            var myOptions = setPopupOptions(marker.position, name, html, backgroundColor); 
+            console.log("marker.position: ", marker.position);
+            infoBox.setOptions(myOptions);
+            infoBox.open(map, this); 
+        });        
+        
+//        google.maps.event.trigger(marker, 'click'); // opens the info window onload 
+    }; // end createMarker    
+            
+    /* Returns popup properties {} options for a popup and attaches start & end navigation buttons.
+    @ params name: name property of the geojson file when parsed
+    @ params html: html content to be attached to the Div's innerHTML
+    */
+    function setPopupOptions(latlong, name, html, backgroundColor) {
+        var infoBoxDiv = document.createElement("div");
+        infoBoxDiv.style.cssText = "margin-top: 30px; background: " + backgroundColor + "; padding: 10px; border-radius: 5px; color: #fff";
         var fullContent = name 
-        boxText.innerHTML = html;
-        
-        var myOptions = {
-            content: boxText,
+        infoBoxDiv.innerHTML = html;
+
+        // add in html elements for nav start/end buttons to send lat/longs to forms
+        infoBoxDiv.innerHTML += addNavButtons(latlong);
+        console.log("latlong: ", latlong.lng, latlong.lat);
+//        var startButton, endButton;    
+//        var startButton = infoBoxDiv.appendChild(document.createElement('input'));
+//        startButton.type='button';
+//        startButton.setAttribute("id", "#startbutton");
+//        startButton.value='Ride from Here!'
+//        google.maps.event.addDomListener(startButton,'click', function(){
+//            sendLocationToStart(latlong);})         
+
+        var popupOptions = {
+            content: infoBoxDiv,
             disableAutoPan: false,
             maxWidth: 0,
             pixelOffset: new google.maps.Size(-100, 0),
@@ -299,33 +246,47 @@
             enableEventPropagation: false
         };
 
-        var marker = new google.maps.Marker({
-            position: latlng,
-            //        icon: category + ".png",
-            icon: myIcon,
-            map: map,
-            title: name,
-            zIndex: Math.round(latlng.lat()*-100000)<<5
-        });
-        // no purpose for bouncing!
-        marker.setAnimation(google.maps.Animation.DROP)
-        // Store category and name info as a marker properties 
-        marker.mycategory = category;   
-        marker.myname = name;
-        gmarkersTweets.push(marker);
-        google.maps.event.addListener(marker, 'click', function() {
-            infoBox.setOptions(myOptions);
-            infoBox.open(map, this);
-        });        
-    }; // end createMarker    
-            
-    // Adds start & end urls to popup 
-    function addNavLinksToPopup(marker, html) {
-        var navUrls = "<p><button class='.btn-link' type='button' id='navlink'>Ride from Here</button></p>";       
-        return html += navUrls;
-    };
-        
-    
+        return popupOptions;
+    };    
+
     $(document).ready(initMap);
+    
+//THESE WERE ADDED AS GLOBAL FUNCTIONS IN INDEX.HTML    
+//    /* When user clicks the end button, a click on the map fills in the form field with the lat long object and writes numbers into the startbutton and startfield.
+//    @param latlong: an array of the [latitude, longitude] or any numbers to populate the form's field.
+//    @param navOption: "start" or "end" of the form field id ("endbox" or "startbox" or button id of "startbutton" or "endbutton". 
+//    */
+//    function sendLocationToStart(latlong) {
+//        $("#startbutton").click(function(){
+//            alert("Click a place on the map for a starting point.")
+////            makeNavMarkerWithClick(map, "end");
+//            $("input[id=startfield]").val(String(latlong));
+//        });
+//    };       
+//    
+//    /* When user clicks the end button, a click on the map fills in the form field with the lat long object and writes numbers into the endbutton and endfield.
+//    @param latlong: an array of the [latitude, longitude] or any numbers to populate the form's field.
+//    @param navOption: "start" or "end" of the form field id ("endbox" or "startbox" or button id of "startbutton" or "endbutton". 
+//    */
+//    function sendLocationToEnd(latlong) {
+//        $("#endbutton").click(function(){
+//            alert("Click a place on the map for a starting point.")
+////            makeNavMarkerWithClick(map, "end");
+//            $("input[id=endfield]").val(String(latlong));
+//        });
+//    };    
+    
+
+    /* Adds end and start nav buttons with click events to the buttons. To be added to innerHTML of info windows.
+    @params: latlong: the returned list of [latitude, longitude]
+    */
+    function addNavButtons(latlong) {
+        console.log("latlong: ", latlong);
+        // Added for nav buttons
+        var endButton = "<p><button type='button' id='endbutton' onclick='sendLocationToEnd("+latlong+")'>Ride to Here</button></p>";        
+        var startButton = "<p><button type='button' id='startbutton' onclick='sendLocationToStart("+latlong+")'>Ride from Here</button></p>";
+        var addNavButtons = endButton + startButton;
+        return addNavButtons;  
+    };    
     
 })();
