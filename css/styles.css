@@ -40,6 +40,13 @@ form {
 	text-align: center;
 }
 
+#starttour {
+	top: 15vh;
+	left: 20vw;
+	height: 5vh;
+	width: 8vw;    
+}
+
 #toggleAttractions {
 	top: 15vh;
 	right: 1vw;

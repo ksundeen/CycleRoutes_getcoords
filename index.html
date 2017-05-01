@@ -26,14 +26,13 @@
 	
 		<button type="button" class="layerToggle btn btn-default" id="toggleAttractions">Attractions</button>
 		<button type="button" class="layerToggle btn btn-default" id="toggleTweets">Tweets</button>    
-		<div data-position='right' data-step="1" data-intro="Starting here..." id="introjs">
+        <button type="button" class=btn-default data-step="1" data-intro="This is our tour"> <a  id="tourstart" href="javascript:void(0);">Start Tour</a></button>
 		<form>
 			<div id="sidePanelContainer">
 				<div id = "introContent">
 					<button type="button" id="panelButton" class="btn btn-default" data-toggle="collapse" data-target="#sidePanelContent"></button>
 				</div>
-				<div data-step="1" data-intro="This is our tour" id="sidePanelContent"><a id="tourstart" href="javascript:void(0);">Start Tour</a>
-                </div>
+
 				<div id="routePanelContent"></div>
 			 	<div id="elevation_chart">
    					<script>
@@ -60,7 +59,6 @@
 		<div id="map-canvas" class="col-xs-12"></div>
 	  
 	</div>
-</div>
   
 <!--  jQuery -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -77,6 +75,6 @@
     introJs().start();
   });  
 </script>
-<script src="js/loadmap.js?ver=1.1"></script>
+<script src="js/loadmap.js?ver=1.2"></script>
 </body>
 </html>
