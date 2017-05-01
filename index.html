@@ -8,7 +8,7 @@
 <script src="https://www.google.com/jsapi"></script>
 
 <!-- Custom Styles -->
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?ver=1.9">
 <link href="css/introjs.css" rel="stylesheet">
 
 <!-- Bootstrap -->
@@ -20,19 +20,33 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<a class="navbar-brand">Cycle Routes Duluth, MN</a>
 </nav>
-  
+    
+<!--<a id="tourstart" href="javascript:void(0);" onclick="javascript:introJs().start();"></a>    -->
+    
+<!-- Control button to start tour -->
+<button id="tourbutton" type="button" class="btn btn-default" href="javascript:void(0);" onclick="javascript:introJs().start();">Start Tour</button>
+    
+<!--
+data-step="1" data-intro="Click here to start mapping your route."  
+data-step="3" data-intro="Locate yourself."
+data-step="5" data-intro="Click to toggle on/off Duluth Attractions."   
+data-step="6" data-intro="Click to toggle on/off Tweets."
+data-step="2" data-intro="Click here to get your bike route."
+data-step="4" data-intro="Get more information."
+-->
+    
 <div class="container-fluid">
 	<div class="row">
 	
-		<button type="button" class="layerToggle btn btn-default" id="toggleAttractions">Attractions</button>
-		<button type="button" class="layerToggle btn btn-default" id="toggleTweets">Tweets</button>    
-        <button type="button" class=btn-default data-step="1" data-intro="This is our tour"> <a  id="tourstart" href="javascript:void(0);">Start Tour</a></button>
+		<button type="button" class="layerToggle btn btn-default" id="toggleAttractions" data-step="5" data-intro="Click to toggle on/off Duluth Attractions.">Attractions</button>
+		<button type="button" class="layerToggle btn btn-default" id="toggleTweets" data-step="6" data-intro="Click to toggle on/off Tweets.">Tweets</button>    
+		
 		<form>
-			<div id="sidePanelContainer">
-				<div id = "introContent">
+			<div id="sidePanelContainer" data-step="1" data-intro="Click here to start mapping your route.">
+				<div id="introContent">
 					<button type="button" id="panelButton" class="btn btn-default" data-toggle="collapse" data-target="#sidePanelContent"></button>
 				</div>
-
+				<div id="sidePanelContent"></div>
 				<div id="routePanelContent"></div>
 			 	<div id="elevation_chart">
    					<script>
@@ -45,20 +59,20 @@
 				<div><input type="text" id="startbox" placeholder="Start"></div>
 				<div><input type="text" id="endbox" placeholder="Destination"></div>
 		
-				<button type="button" class="layerToggle btn btn-default" id="getDirections">Map My Route</button>
+				<button type="button" class="layerToggle btn btn-default" id="getDirections" data-step="2" data-intro="Click here to get your bike directions.">Map My Route</button>
 				<div class="widgets-wrapper">
 					<div class="widgets">
-						<div id="help"></div>
-						<div id="locateMe"></div>
+						<div id="help" data-step="4" data-intro="Get more information."></div>
+						<div id="locateMe" data-step="3" data-intro="Locate yourself."></div>
 					</div>
 				</div>
 			</div>
 		</form>
-        </div> <!-- end introjs -->
 		
 		<div id="map-canvas" class="col-xs-12"></div>
 	  
 	</div>
+    </div>
   
 <!--  jQuery -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -70,11 +84,6 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="lib/infobox/src/infobox.js"></script>
 <script type="text/javascript" src="lib/intro.js"></script>
-<script>
-    $("#tourstart").click(function() {
-    introJs().start();
-  });  
-</script>
-<script src="js/loadmap.js?ver=1.2"></script>
+<script src="js/loadmap.js?ver=1.1"></script>
 </body>
 </html>

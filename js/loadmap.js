@@ -95,7 +95,7 @@ function welcomePanel() {
 	})
 	
 	var panelContent = $("#sidePanelContent");
-	var html = "<h2>Cycle Routes</h2><br><p>Find the safest bike route anywhere in the city of Duluth</p><br>Select start and endpoints by searching, clicking on sites, or double click anywhere to create your own destination</p>"
+	var html = "<div data-step='1 data-intro='Start here to get your route.'><h2>Cycle Routes</h2><br><p>Find the safest bike route anywhere in the city of Duluth</p><br>Select start and endpoints by searching, clicking on sites, or double click anywhere to create your own destination</p></div>"
 	panelContent.html(html);
 }
 
