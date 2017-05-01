@@ -9,6 +9,7 @@
 
 <!-- Custom Styles -->
 <link rel="stylesheet" href="css/styles.css">
+<link href="css/introjs.css" rel="stylesheet">
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -25,13 +26,14 @@
 	
 		<button type="button" class="layerToggle btn btn-default" id="toggleAttractions">Attractions</button>
 		<button type="button" class="layerToggle btn btn-default" id="toggleTweets">Tweets</button>    
-		
+		<div data-position='right' data-step="1" data-intro="Starting here..." id="introjs">
 		<form>
 			<div id="sidePanelContainer">
-				<div id = introContent>
+				<div id = "introContent">
 					<button type="button" id="panelButton" class="btn btn-default" data-toggle="collapse" data-target="#sidePanelContent"></button>
 				</div>
-				<div id="sidePanelContent"></div>
+				<div data-step="1" data-intro="This is our tour" id="sidePanelContent"><a id="tourstart" href="javascript:void(0);">Start Tour</a>
+                </div>
 				<div id="routePanelContent"></div>
 			 	<div id="elevation_chart">
    					<script>
@@ -53,8 +55,7 @@
 				</div>
 			</div>
 		</form>
-		
-
+        </div> <!-- end introjs -->
 		
 		<div id="map-canvas" class="col-xs-12"></div>
 	  
@@ -63,13 +64,19 @@
   
 <!--  jQuery -->
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!--<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
 <!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- Google Maps API -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyDHXqtgqGCj7RMkh3ual_upusbnbFUq4Ko&libraries=places,visualization,geometry"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDHXqtgqGCj7RMkh3ual_upusbnbFUq4Ko&libraries=places,visualization,geometry"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="lib/infobox/src/infobox.js"></script>
-<script src="js/loadmap.js"></script>
+<script type="text/javascript" src="lib/intro.js"></script>
+<script>
+    $("#tourstart").click(function() {
+    introJs().start();
+  });  
+</script>
+<script src="js/loadmap.js?ver=1.1"></script>
 </body>
 </html>

@@ -17,12 +17,14 @@ google.charts.load('current', {'packages':['corechart']});
 tab_id=1;
 
 function initialization() {
-	var mapOptions = {
-			mapTypeId : google.maps.MapTypeId.TERRAIN, // Set the type of Map
-	    };
+        var mapOptions = {
+            zoom: 12,
+            center: {lat: 46.8, lng: -92.1}, 
+            mapTypeId: 'terrain'
+        };
 	  
 	// Render the map within the empty div
-	map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 	  
 	google.maps.event.addListener(map, 'click', function() {
         infoBox.close();
@@ -258,7 +260,7 @@ function showSites(tab_id,sourceCoord,targetCoord) {
 
 function mapInitialization(sites) {
   
-  var bounds = new google.maps.LatLngBounds ();
+//  var bounds = new google.maps.LatLngBounds ();
   
   if (tab_id=="1") {
 	  loadAttractions(sites,bounds); //if we're loading attractions, fire the function
