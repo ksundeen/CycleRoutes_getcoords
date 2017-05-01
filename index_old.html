@@ -1,0 +1,109 @@
+<!--<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--<!DOCTYPE HTML>-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Cycle Routes</title>
+
+<!-- Custom Styles -->
+<link rel="stylesheet" href="css/styles.css">
+    
+<!--Kim's css    -->
+<link rel="stylesheet" href="css/formcss.css?ver=1.2">
+    
+<!--  jQuery -->
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<!--<script src="//code.jquery.com/jquery-migrate-1.2.1.mim.js"></script>-->
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDHXqtgqGCj7RMkh3ual_upusbnbFUq4Ko&libraries=places,visualization"></script>
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <a class="navbar-brand">Cycle Routes Duluth, MN</a>
+  </nav>
+  
+  <div class="container-fluid">
+    <div class="row">
+    
+<!--
+      <div class="sidebar col-xs-3">
+        <ul class="nav nav-tabs">
+          <li><a href="#query_report" data-toggle="tab">Query</a></li>
+        </ul>
+        
+        <div class="tab-content ">
+          <div class="tab-pane" id="query_report"></div>
+        </div>
+      </div>
+-->
+
+    <!--Kim added form-->        
+    <div class="sidebar col-xs-3" id="entryform">
+      <form action="#">
+<!--
+          <p>...not working yet</p>
+        <label for="entrytype">How do you want to enter your start/end points?</label>          
+        <select id="entrytype">
+          <option value="mappoints">Click My Points</option>    
+          <option value="address">Enter Address</option>             
+          <option value="pointentry">Enter Lat/Long</option>
+          <option value="suggest">Let Us Suggest!</option>
+        </select>
+          <p>...not working yet</p>
+-->
+          
+        <label>Starting Point</label>
+        <input type="text" id="startfield" placeholder="Click a starting map point...">
+        <label>Ending Point</label>
+        <input type="text" id="endfield" placeholder="Click an ending map point...">
+        <input type="submit" value="Get Route">
+      </form>
+    </div>     
+      
+      <div id="map-canvas" class="col-xs-9"></div>
+      
+    </div>
+  </div>
+
+    <script type="text/javascript" src="lib/infobox/src/infobox.js"></script>
+<!--    <script type="text/javascript" src="lib/jquery-3.1.1.js"></script>     -->
+    <!--Referenced for accordian jquery CDN-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>        
+    <script src="lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>    
+    
+    <script>
+    /* When user clicks the end button, a click on the map fills in the form field with the lat long object and writes numbers into the startbutton and startfield.
+    @param latlong: an array of the [latitude, longitude] or any numbers to populate the form's field.
+    */
+    function sendLocationToStart(latlong) {
+            $("input[id=startfield]").val(latlong);
+    };       
+    
+    /* When user clicks the end button, a click on the map fills in the form field with the lat long object and writes numbers into the endbutton and endfield.
+    @param latlong: an array of the [latitude, longitude] or any numbers to populate the form's field.
+    */
+    function sendLocationToEnd(latlong) {
+        $("input[id=endfield]").val(latlong);
+        console.log(latlong);
+    };   
+        
+    </script>
+
+    <!--	<script src="js/loadmap.js"></script>-->
+    <!--    Adds basic geojson points with no layer toggle-->
+    <script src="js/loadmap_basic.js?ver=1.6"></script>
+<!--    Based on example for loading google lat long into form-->
+<!--    <script src="js/googleform.js"></script>-->
+
+</body>
+</html>
