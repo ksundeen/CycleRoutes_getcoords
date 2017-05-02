@@ -64,9 +64,9 @@ function widgets(){
 	var helpWidget = $("#help");
 	html = "<img src = 'img/help.png' id='helpImg' class='widget' alt='help'>";
 	helpWidget.html(html);
-	helpWidget.click(function(){
-		$("#panelButton").trigger("click");
-	});
+//	helpWidget.click(function(){
+//		$("#panelButton").trigger("click");
+//	});
 	//widget to allow user to locate self and use as starting point
 	var locateWidget = $("#locateMe");
 	html = "<img src = 'img/locateMe.png' id='locateMeImg' class='widget' alt='help'>";
@@ -95,7 +95,7 @@ function welcomePanel() {
 	})
 	
 	var panelContent = $("#sidePanelContent");
-	var html = "<div data-step='1 data-intro='Start here to get your route.'><h2>Cycle Routes</h2><br><p>Find the safest bike route anywhere in the city of Duluth</p><br>Select start and endpoints by searching, clicking on sites, or double click anywhere to create your own destination</p></div>"
+	var html = "<h2>Cycle Routes</h2><br><p>Find the safest bike route anywhere in the city of Duluth</p><br>Select start and endpoints by searching, clicking on sites, or double click anywhere to create your own destination</p>"
 	panelContent.html(html);
 }
 

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Accordion - Collapse content</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  } );
+  </script>
+</head>
+<body>
+ 
+<div id="accordion">
+ 
+        <h1>About the Bike Routes</h1>
+        <div>
+            <p>Everyone wants to find the most interesting, safest, and rideable bike route around town, right? We worked with local Duluth bicylcists to determine what a "rideable" bike route would be. It turns out that you know the best routes and turned to Strava.com for ridership maps. </p>
+            <p>What's <i>ridership</i>i> you say? Well, we're at least defining <i>ridership</i> as the density of riders, or the number of riders per road throghout the Duluth, MN area. Strava's fantastic app show annual <a href="http://labs.strava.com/heatmap/#9/-92.27005/46.77749/blue/bike" target="_blank">Global Heatmap</a> for all the roads worldwide.</p>
+            <p>To digest Strava' data into a biking app for you, we downloaded a copy of the Global Heatmap and analyzed each road within the St. Louis County to associate a "rideability" score. We then use the opensource <a href="http://pgrouting.org/" target="_blank">pgRouting</a> tool for our backend PostGIS/Postgresql database to take your start and end point to create a "rideable" bike route for you!</p>
+        </div>
+            
+        <h1>About Us</h1>
+        <div>
+            <h3>We're a bunch of GIS junkies and coding gurus having fun while in school for an online master's in GIS/Cartgraphy (Web Map Programming) at the University of Wisconsin-Madison.</h3> 
+            <h5>Brian Robinson</h5>
+                <p>Ninja Warrier Developer..</p>
+            <h5>JohnMark Fisher</h5>
+                <p>Stealthy Sys Admin</p>
+            <h5>Kim Sundeen</h5>
+                <p>Kung fu Coder</p>
+            <h5>Ian Bachman-Sanders</h5>
+                <p>Coding Bug Assasin</p>  
+        </div>
+</div> <!-- end accordian -->    
+ 
+ 
+</body>
+</html>
