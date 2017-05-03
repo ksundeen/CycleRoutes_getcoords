@@ -1,10 +1,13 @@
-#sidenav {
-    background:#fff;
-    position:absolute;
-    top:2vh;
-    left:1vw;
-    z-index:1;
-	width:10px;
-	border-radius: 4px;
+#aboutuspanel {
+    display: none;
+    position: absolute;
+    width: 50vw;
+    height: 50vh;
+    left: 30vw;
+    top: 30vh;
+    z-index: 100;
+    border-radius: 4px;
+    background-color: #D3D3D3;
 	border:1px solid rgba(0,0,0,0.4);
 }
+
